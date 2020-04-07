@@ -7,18 +7,24 @@
 try{
  // this lines add qurey string to the url (for test only in real-world app we get the qurey string from merchant site)  
 const searchParams = new URLSearchParams(window.location.search);
-searchParams.set("price", 1 );
+searchParams.set("price", 567);
 let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
 history.pushState(null, '', newRelativePathQuery);
+
+
+ //get the qurey string value from the url 
+    
+let string_url =  (window.location.href).toLowerCase(); 
+let url = new URL(string_url);
+const price = url.searchParams.get('price');
+const sdg = 'SDG ' ;
+
+document.getElementById('amont-value').innerHTML = sdg +  price;
+
 
 document.getElementById('myform').addEventListener('submit', postData);
 function postData(event){
     event.preventDefault();
-
-    //get the qurey string value from the url 
-    let string_url =  (window.location.href).toLowerCase();
-    let url = new URL(string_url);
-    const price = url.searchParams.get('price');
 
     // get data from html form
     let name = document.getElementById('tittle').value;
@@ -26,16 +32,23 @@ function postData(event){
     let date = document.getElementById('date').value;
 
     // send all form data and url qurey string to afropay server
-    fetch('https://jsonplaceholder.typicode.com/posts', { // replace this url with afropay api endpoint 
+    fetch('http://192.168.0.106:8080/pay/purchase', {  // replace this url with afropay api endpoint 
         method: 'POST',
-        headers : new Headers(),
-        body:JSON.stringify({ name:name, cardnumber:cardnumber , date: date , price: price})
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+       },
+       
+
+        body:JSON.stringify({ pin:name, pan:cardnumber , exp: date , amount: price})
         })
         .then((res) => res.json())
         .then((data) =>  console.log(data))
-        .catch((err)=>console.log('Fuck Ashraf there is an err  :' + err))
+        .catch((err)=>console.log(' Ashraf there is an err  :' + err))
 }
 }
 catch(err){
-    console.log('Fuck Ashraf There Is An ----- errer:' + err)
+    console.log(' Ashraf There Is An ----- errer:' + err)
 }

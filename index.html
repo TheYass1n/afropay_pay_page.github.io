@@ -8,36 +8,101 @@
         #myform{
             width: 40%;
             margin: 0 auto;
-            background: blue;
             height: 70vh;
             padding-top: 8rem;          
             border-radius: 5px; 
             border: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
 
         }
-        #myform  > input{
+        #myform  > input, #amont {
             width: 60%;
-            height: 5vh;
+            height: 6vh;
             margin: 0 auto;
             margin-bottom: 1rem;
             border: none;
             border-radius: 3px;
+            background: #dedede;
             display:block;
-           
+            text-align: end; 
+        }
+
+        label{
+            width: 60%;
+            text-align: end; 
+             margin: 0 auto;
+              display:block;
+              margin-bottom: .5rem
+
+        }
+
+
+
+        #amont  {
+           align-self: center;
+           align-items: center;
+           display: flex;
+           justify-content: flex-end;
+           flex-direction: row;
+           background:none;
+           border-bottom: 1px solid grey;
+           position: relative;
+}
         }
         input::placeholder{
-            text-align: left;
-            padding-left: 10px;
+            text-align: right;
+            padding-right: 10px;
         }
+
+        #submit{
+            background: blue;
+            color: #fff;
+            text-align: center;
+        }
+        .amont-txt{
+            text-align: right;
+            position: absolute;
+            right: 5px;
+        }
+
+        #amont-value{
+            text-align: left;
+            position: absolute;
+            left: 5px;
+        }
+
+        @media only screen and (max-width: 750px){
+            #myform{
+                width: 100%;
+            }
+            #myform  > input, #amont , label{
+                width: 80%;
+            }
+
+            input::placeholder{
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        } 
         
     </style>
 </head>
 <body>
     <form id="myform" >
-        <input id="tittle" placeholder="your name" required type="text">
-        <input id="body" placeholder="card number" required type="number" name="" >
-        <input id="date" placeholder="exp date" type="date" name="" required >
-        <input type="submit" value="pay">
+        <div id="amont">
+            <label class="amont-txt">المبلغ</label>
+            <div id="amont-value"></div>
+        </div>
+        <label>رقم البطاقة</label>
+        <input id="tittle" placeholder="رقم البطاقة" required type="number">
+        <label>رمز الامان</label>
+        <input id="body" placeholder="رمز الانترنت السري" required type="number" name="" >
+        <label>تاريخ الانتهاء</label>
+        <input id="date" type="month" value="2033-03"  required >
+        <input style="background: blue; text-align: center;" id="submit" type="submit" value="دفع">
     </form>
     <script src="js.js"></script>
 </body>
