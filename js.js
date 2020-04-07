@@ -7,7 +7,7 @@
 try{
  // this lines add qurey string to the url (for test only in real-world app we get the qurey string from merchant site)  
 const searchParams = new URLSearchParams(window.location.search);
-searchParams.set("price", 567);
+searchParams.set("amount", 567);
 let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
 history.pushState(null, '', newRelativePathQuery);
 
