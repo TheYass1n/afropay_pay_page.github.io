@@ -16,10 +16,10 @@ history.pushState(null, '', newRelativePathQuery);
     
 let string_url =  (window.location.href).toLowerCase(); 
 let url = new URL(string_url);
-const price = url.searchParams.get('price');
+const amount = url.searchParams.get('amount');
 const sdg = 'SDG ' ;
 
-document.getElementById('amont-value').innerHTML = sdg +  price;
+document.getElementById('amont-value').innerHTML = sdg +  amount;
 
 
 document.getElementById('myform').addEventListener('submit', postData);
@@ -42,7 +42,7 @@ function postData(event){
        },
        
 
-        body:JSON.stringify({ pin:name, pan:cardnumber , exp: date , amount: price})
+        body:JSON.stringify({ pin:name, pan:cardnumber , exp: date , amount: amount})
         })
         .then((res) => res.json())
         .then((data) =>  console.log(data))
