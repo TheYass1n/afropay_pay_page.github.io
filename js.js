@@ -8,6 +8,7 @@ try{
  // this lines add qurey string to the url (for test only in real-world app we get the qurey string from merchant site)  
 const searchParams = new URLSearchParams(window.location.search);
 searchParams.set("amount", 567);
+searchParams.set("key", "au654fg7ikd34gd2");
 let newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
 history.pushState(null, '', newRelativePathQuery);
 
@@ -16,12 +17,19 @@ history.pushState(null, '', newRelativePathQuery);
     
 let string_url =  (window.location.href).toLowerCase(); 
 let url = new URL(string_url);
-const amount = url.searchParams.get('amount');
-const sdg = 'SDG ' ;
 
+// get the total amount from url
+const amount = url.searchParams.get('amount');
+//get the api key from url
+const key = url.searchParams.get('key')
+// for sudanese curncy  tag
+const sdg = 'SDG ' ;
+// append the amount into DOM
 document.getElementById('amont-value').innerHTML = sdg +  amount;
 
 
+
+// function to send data to the server
 document.getElementById('myform').addEventListener('submit', postData);
 function postData(event){
     event.preventDefault();
@@ -42,7 +50,7 @@ function postData(event){
        },
        
 
-        body:JSON.stringify({ pin:name, pan:cardnumber , exp: date , amount: amount})
+        body:JSON.stringify({ pin:name, pan:cardnumber , exp: date , amount: amount, apiKey: key})
         })
         .then((res) => res.json())
         .then((data) =>  console.log(data))
